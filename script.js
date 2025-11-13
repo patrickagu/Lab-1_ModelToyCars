@@ -115,3 +115,34 @@ const applyEdit = document.getElementById("applyEdit");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
+// Collect values from the form
+  const car = new ToyCar(
+    document.getElementById("brand").value,
+    document.getElementById("model").value,
+    document.getElementById("year").value,
+    document.getElementById("scale").value,
+    document.getElementById("color").value,
+    document.getElementById("finish").value,
+    document.getElementById("materialBody").value,
+    document.getElementById("hasRubberTires").checked,
+    document.getElementById("openingParts").value,
+    document.getElementById("sku").value,
+    document.getElementById("series").value,
+    document.getElementById("packaging").value,
+    document.getElementById("lengthInches").value,
+    document.getElementById("weightGrams").value,
+    document.getElementById("price").value
+  );
+
+  // Add car to list
+  cars.push(car);
+
+  // Reset selection and form
+  selectedIndex = null;
+  editor.hidden = true;
+  form.reset();
+
+  // Re-render list
+  renderList();
+});
+
