@@ -43,3 +43,32 @@ function ToyCar(
   this.displayName = this.year + " " + this.model + " (" + this.scale + ")";
 }
 
+// Instance methods on the prototype
+ToyCar.prototype.summary = function () {
+  return (
+    this.displayName +
+    " — " +
+    this.color +
+    " " +
+    this.finish +
+    " • " +
+    this.materialBody +
+    " • $" +
+    this.price.toFixed(2)
+  );
+};
+
+ToyCar.prototype.updateColor = function (newColor) {
+  if (newColor && newColor.trim().length > 0) {
+    this.color = newColor.trim();
+  }
+};
+
+ToyCar.prototype.updatePrice = function (newPrice) {
+  const p = Number(newPrice);
+  if (!isNaN(p) && p >= 0) {
+    this.price = p;
+  }
+};
+
+
