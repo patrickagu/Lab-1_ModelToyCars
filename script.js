@@ -146,3 +146,64 @@ form.addEventListener("submit", function (e) {
   renderList();
 });
 
+// Render the list of cars
+function renderList() {
+  carList.innerHTML = "";
+
+  cars.forEach(function (car, index) {
+    const li = document.createElement("li");
+    li.className = "car-card";
+
+    // Title
+    const title = document.createElement("h4");
+    title.textContent = car.brand + " " + car.summary();
+    li.appendChild(title);
+
+    // Meta details
+    const meta = document.createElement("div");
+    meta.className = "car-meta";
+    meta.textContent =
+      "SKU: " +
+      (car.sku || "—") +
+      " • Series: " +
+      (car.series || "—") +
+      " • Packaging: " +
+      car.packaging;
+    li.appendChild(meta);
+
+    // Actions
+    const actions = document.createElement("div");
+    actions.className = "card-actions";
+
+    const editBtn = document.createElement("button");
+    editBtn.type = "button";
+    editBtn.textContent = "Edit";
+    editBtn.addEventListener("click", function () {
+      selectedIndex = index;
+      editColor.value = car.color;
+      editPrice.value = car.price.toFixed(2);
+      editor.hidden = false;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", function () {
+      cars.splice(index, 1);
+      if (selectedIndex === index) {
+        selectedIndex = null;
+        editor.hidden = true;
+      }
+      renderList();
+    });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+    li.appendChild(actions);
+
+    carList.appendChild(li);
+  });
+}
+
+
